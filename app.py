@@ -9,8 +9,9 @@ CORS(app)
 #socketio = SocketIO(app, cors_allowed_origins='*')
 
 def ValuePredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(1, 16)
+    to_predict = np.array(to_predict_list).reshape(1, len(to_predict_list))
     loaded_model = pickle.load(open("pkl/heart_KNN.pkl", "rb"))
+    print(loaded_model)
     result = loaded_model.predict_proba(to_predict)
     return round(result[0][1]*100, 2)
 
@@ -28,26 +29,25 @@ def returnProb():
     to_predict_list = []
     for x in X:
         to_predict_list.append(int(request.args[x]))
-    print(to_predict_list)
-    # to_predict_list.append(int(request.args['Age']))    
-    # to_predict_list.append(int(request.args['Gender']))
-    # to_predict_list.append(int(request.args['Polyuria']))
-    # to_predict_list.append(int(request.args['Polydipsia']))
-    # to_predict_list.append(int(request.args['sudden_weight_loss']))
-    # to_predict_list.append(int(request.args['weakness']))
-    # to_predict_list.append(int(request.args['Polyphagia']))
-    # to_predict_list.append(int(request.args['Genital_thrush']))
-    # to_predict_list.append(int(request.args['visual_blurring']))
-    # to_predict_list.append(int(request.args['Itching']))
-    # to_predict_list.append(int(request.args['Irritability']))
-    # to_predict_list.append(int(request.args['delayed_healing']))
-    # to_predict_list.append(int(request.args['partial_paresis']))
-    # to_predict_list.append(int(request.args['muscle_stiffness']))
-    # to_predict_list.append(int(request.args['Alopecia']))
-    # to_predict_list.append(int(request.args['Obesity']))
+    # print(to_predict_list)
+    # to_predict_list.append(int(request.args['age'])) 
+    # to_predict_list.append(int(request.args['sex']))
+    # to_predict_list.append(int(request.args['cp']))
+    # to_predict_list.append(int(request.args['trtbps']))
+    # to_predict_list.append(int(request.args['chol']))
+    # to_predict_list.append(int(request.args['fbs']))
+    # to_predict_list.append(int(request.args['restecg']))
+    # to_predict_list.append(int(request.args['thalachh']))
+    # to_predict_list.append(int(request.args['exng']))
+    # to_predict_list.append(int(request.args['oldpeak']))
+    # to_predict_list.append(int(request.args['slp']))
+    # to_predict_list.append(int(request.args['caa']))
+    # to_predict_list.append(int(request.args['thall']))
     d['output'] = str(ValuePredictor(to_predict_list))
     # return str(to_predict_list)
     return d
 
 if __name__ =="__main__":
     app.run(debug=True)
+
+# api?age=30&sex=0&cp=1&trtbps=1&chol=1&fbs=1&restecg=1&thalachh=1&exng=1&oldpeak=1&slp=1&caa=1&thall=1
