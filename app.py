@@ -23,26 +23,26 @@ def returnProb():
     # d['output'] = answer
     # return d
     d = {}
-    X = ['age', 'sex', 'cp', 'trtbps', 'chol',
-         'fbs', 'restecg', 'thalachh', 'exng',
-         'oldpeak', 'slp', 'caa', 'thall']
+    #X = ['age', 'sex', 'cp', 'trtbps', 'chol',
+    #     'fbs', 'restecg', 'thalachh', 'exng',
+    #     'oldpeak', 'slp', 'caa', 'thall']
     to_predict_list = []
-    for x in X:
-        to_predict_list.append(int(request.args[x]))
+    #for x in X:
+    #    to_predict_list.append(int(request.args[x]))
     # print(to_predict_list)
-    # to_predict_list.append(int(request.args['age'])) 
-    # to_predict_list.append(int(request.args['sex']))
-    # to_predict_list.append(int(request.args['cp']))
-    # to_predict_list.append(int(request.args['trtbps']))
-    # to_predict_list.append(int(request.args['chol']))
-    # to_predict_list.append(int(request.args['fbs']))
-    # to_predict_list.append(int(request.args['restecg']))
-    # to_predict_list.append(int(request.args['thalachh']))
-    # to_predict_list.append(int(request.args['exng']))
-    # to_predict_list.append(int(request.args['oldpeak']))
-    # to_predict_list.append(int(request.args['slp']))
-    # to_predict_list.append(int(request.args['caa']))
-    # to_predict_list.append(int(request.args['thall']))
+    to_predict_list.append((float(request.args['age'])-29)/48) 
+    to_predict_list.append(int(request.args['sex']))
+    to_predict_list.append(int(request.args['cp']))
+    to_predict_list.append((float(request.args['trtbps'])-94)/106)
+    to_predict_list.append((float(request.args['chol'])-126)/438)
+    to_predict_list.append(int(request.args['fbs']))
+    to_predict_list.append(int(request.args['restecg']))
+    to_predict_list.append((float(request.args['thalachh'])-71)/131)
+    to_predict_list.append(int(request.args['exng']))
+    to_predict_list.append(float(request.args['oldpeak']))
+    to_predict_list.append(int(request.args['slp']))
+    to_predict_list.append(int(request.args['caa']))
+    to_predict_list.append(int(request.args['thall']))
     d['output'] = str(ValuePredictor(to_predict_list))
     # return str(to_predict_list)
     return d
