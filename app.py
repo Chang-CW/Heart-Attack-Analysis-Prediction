@@ -10,7 +10,7 @@ CORS(app)
 
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, len(to_predict_list))
-    loaded_model = pickle.load(open("pkl/heart_KNN.pkl", "rb"))
+    loaded_model = pickle.load(open("pkl/heart_RandomForestClassifier.pkl", "rb"))
     print(loaded_model)
     result = loaded_model.predict_proba(to_predict)
     return round(result[0][1]*100, 2)
